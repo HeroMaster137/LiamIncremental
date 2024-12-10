@@ -7,15 +7,16 @@ var startHeliCost = 100;
 var heliCost = 100;
 var helisExpo = 1.5;
 var heliWorth = 0.5;
-var loamEquation = (Math.pow((liams-1000)/100,0.75));
+var loamEquation = 0.75;
 
 var loamUnlocked = false;
 function getLoamEquation() {
-    return (Math.pow((liams-1000)/100,0.75));
+    return (Math.pow((liams-1000)/100,loamEquation));
 }
 function liamClick(number){
     liams = Math.trunc((liams + number)*10)/10;
-    document.getElementById("liamAmount").innerHTML = liams;
+    document.getElementById('liamAmount').innerHTML = liams;
+    
 }
 function buyHeli(){
     var heliCost = Math.floor(100 * Math.pow(helisExpo,helis));
@@ -101,17 +102,28 @@ function buyTuesday(){
     var nextCost = Math.floor(startTuesdayCost * Math.pow(tuesdaysExpo,tuesdays));
     document.getElementById('tuesdayCost').innerHTML = nextCost;
 }
+var isBetterLoam = false;
+function buyBetterLoam(){
+    if(loams >= 100 && !isBetterLoam){
+        isBetterLoam = true;
+        loamEquation = 0.8;
+        loams = loams-100;
+        loams = Math.trunc(loams*10)/10;
+        document.getElementById('loamUnlockCost').innerHTML = "Already Bought";
+        document.getElementById('loamAmount').innerHTML = loams;
+    };
+}
 
 window.setInterval(function(){
     //console.log((Math.pow((liams-1000)/100,0.9)));
-    if((getLoamEquation())>=0) {
-        document.getElementById('loamPotention').innerHTML = Math.trunc(getLoamEquation()*10)/10;
-    } else {
-        document.getElementById('loamPotention').innerHTML = 0;
-    }
-    if (loamUnlocked == true) {
-        document.getElementById("loam").style.opacity = 1;
-    }
+        if((getLoamEquation())>=0) {
+            document.getElementById('loamPotention').innerHTML = Math.round(getLoamEquation()*10)/10;
+        } else {
+            document.getElementById('loamPotention').innerHTML = 0;
+        }
+        if (loamUnlocked == true) {
+            document.getElementById('loam').style.opacity = 1;
+        } 
 }, 10);
 
 window.setInterval(function(){
