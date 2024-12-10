@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head> <link rel="stylesheet" type="text/css" href="interface.css" />
+    <meta charset="UTF-8" />
+    <title>Liam Incremental</title>
+</head>
+<body>
+    <h1>Welcome to Liam Incremental!</h1>
+    <button onClick="liamClick(1)">Find A Liam</button>
+    <h3>You have found <b><span id="liamAmount">0</span></b> Liams</h3>
+    <h2>Search and Rescue Upgrades<br/></h2>
+    <button onClick="buySearchAndRescue()">Buy A Search And Rescue Team(+<span id="teamAdd">1</span> Liam/s)<br/>Cost: <span id="teamCost">10</span> Liams<br/>Teams: <span id="teamAmount">0</span></button>
+    <button onClick="buyHeli()">Buy A Helicopter(+<span id="heliAdd">0.5</span> to SaR Team Base)<br/>Cost: <span id="heliCost">100</span> Liams<br/>Helis: <span id="heliAmount">0</span></button>
+    <br/><button onClick="resetLiam()">Reach 1000 Liams to reset Liams and SaR Upgrades to gain <b><span id="loamPotention">0</span></b> Loams</button>
+    <div id="loam" style="opacity:0">
+        <br/><h1>Loams: <b><span id="loamAmount">0</span></b></h1>
+        <br><button onClick="buyGame()">Buy Game(Adds 0.1 to Helis)<br/>Cost: <span id="gameCost">5</span> Loams<br/>Games: <span id="gameAmount">0</span></button>
+        <br><button onClick="buyTuesday()">Buy Tuesday(Multiplies SaR Team Upgrade by 2x for each Tuesday)<br/>Cost: <span id="tuesdayCost">15</span> Loams<br/>Tuesdays: <span id="tuesdayAmount">0</span></button>
+    </div>
+</body> <script type="text/javascript" src="main.js"></script>
+</html>
