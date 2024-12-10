@@ -23,7 +23,7 @@ function buyHeli(){
         helis = helis + 1;
     	liams = liams - heliCost;
         document.getElementById('heliAmount').innerHTML = helis;
-        document.getElementById('liamAmount').innerHTML = liams;
+        document.getElementById('liamAmount').innerHTML = Math.round(liams*10)/10;
         document.getElementById('teamAdd').innerHTML = Math.round((teamWorth+((heliWorth+(games*gameWorth))*helis))*10)/10*tuesdayWorth;
     };
     var nextCost = Math.floor(100 * Math.pow(helisExpo,helis));
@@ -41,7 +41,7 @@ function buySearchAndRescue(){
         teams = teams + 1;
     	liams = liams - teamCost;
         document.getElementById('teamAmount').innerHTML = teams;
-        document.getElementById('liamAmount').innerHTML = liams;
+        document.getElementById('liamAmount').innerHTML = Math.round(liams*10)/10;
     };
     var nextCost = Math.floor(10 * Math.pow(teamsExpo,teams));
     document.getElementById('teamCost').innerHTML = nextCost;
@@ -77,7 +77,7 @@ function buyGame(){
         document.getElementById('gameAmount').innerHTML = games;
         document.getElementById('loamAmount').innerHTML = loams;
         document.getElementById('teamAdd').innerHTML = Math.round((teamWorth+((heliWorth+(games*gameWorth))*helis))*10)/10*tuesdayWorth;
-        document.getElementById('heliAdd').innerHTML = 0.5+(gameWorth*games);
+        document.getElementById('heliAdd').innerHTML = Math.round((0.5+(gameWorth*games))*10)/10;
     };
     var nextCost = Math.floor(startGamesCost * Math.pow(gamesExpo,games));
     document.getElementById('gameCost').innerHTML = nextCost;
