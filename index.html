@@ -23,18 +23,18 @@
             <br/><button onClick="resetLiam()">Reach 1000 Liams to reset Liams and SaR Upgrades to gain <b><span id="loamPotention">0</span></b> Loams</button>
             <div id="loam1" style="opacity: 0;">
                 <h2>Loam Upgrades</h2>
-                <br><button id="loamButton" onClick="buyGame()" disabled>Buy Game(Adds 0.1 to Helis)<br/>Cost: <span id="gameCost">5</span> Loams<br/>Games: <span id="gameAmount">0</span></button>
-                <button onClick="buyTuesday()">Buy Tuesday(1.7x SaR Team Upgrade for each Tuesday)<br/>Cost: <span id="tuesdayCost">15</span> Loams<br/>Tuesdays: <span id="tuesdayAmount">0</span></button>
+                <br><button onClick="buyGame()" class="loamButton" disabled>Buy Game(Adds 0.1 to Helis)<br/>Cost: <span id="gameCost">5</span> Loams<br/>Games: <span id="gameAmount">0</span></button>
+                <button onClick="buyTuesday()" class="loamButton" disabled>Buy Tuesday(1.7x SaR Team Upgrade for each Tuesday)<br/>Cost: <span id="tuesdayCost">15</span> Loams<br/>Tuesdays: <span id="tuesdayAmount">0</span></button>
             </div>
         </div>
           
           <div id="Unlocks" class="tabcontent">
             <div id="loam2" style="opacity: 0;">
                 <h2>Loam Unlocks<br/></h2>
-                <button onClick="buyMonday()">Buy Day After Monday Unlock(Start with 1 SaR Team after Loam reset)<br/>Cost: <span id="mondayUnlockCost">50 Loams</span><br/></button>
-                <button onClick="buyBetterLoam()">Buy Loam Unleashed Unlock(Increases amount of loam gained)<br/>Cost: <span id="loamUnlockCost">100 Loams</span><br/></button>
-                <button onClick="buyAutoSaRTeam()">Buy SaR Team Manager(Autobuys SaR Teams)<br/>Cost: <span id="autoSaRTeamUnlockCost">250 Loams</span><br/>Status(click to switch status): <span id="autoSaRTeamStatus">Disabled</span></button>
-                <button onClick="buyAutoHeli()">Buy Heli Manager(Autobuys Helis)<br/>Cost: <span id="autoHeliUnlockCost">250 Loams</span><br/>Status(click to switch status): <span id="autoHeliStatus">Disabled</span></button>
+                <button onClick="buyMonday()" class="loamButton" disabled>Buy Day After Monday Unlock(Start with 1 SaR Team after Loam reset)<br/>Cost: <span id="mondayUnlockCost">50 Loams</span><br/></button>
+                <button onClick="buyBetterLoam()" class="loamButton" disabled>Buy Loam Unleashed Unlock(Increases amount of loam gained)<br/>Cost: <span id="loamUnlockCost">100 Loams</span><br/></button>
+                <button onClick="buyAutoSaRTeam()" class="loamButton" disabled>Buy SaR Team Manager(Autobuys SaR Teams)<br/>Cost: <span id="autoSaRTeamUnlockCost">250 Loams</span><br/>Status(click to switch status): <span id="autoSaRTeamStatus">Disabled</span></button>
+                <button onClick="buyAutoHeli()" class="loamButton" disabled>Buy Heli Manager(Autobuys Helis)<br/>Cost: <span id="autoHeliUnlockCost">250 Loams</span><br/>Status(click to switch status): <span id="autoHeliStatus">Disabled</span></button>
             </div>
           </div>
           

@@ -99,3 +99,9 @@ button1:active {
   .loam {
     opacity: 0;
   }
+  .loamButton:hover {
+    cursor:default;
+  }
+  .loamUnButton:hover {
+    cursor:pointer;
+  }
