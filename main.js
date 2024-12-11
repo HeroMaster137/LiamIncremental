@@ -25,7 +25,7 @@ function buyHeli(){
     	liams = liams - heliCost;
         document.getElementById('heliAmount').innerHTML = helis;
         document.getElementById('liamAmount').innerHTML = Math.round(liams*10)/10;
-        document.getElementById('teamAdd').innerHTML = Math.round((teamWorth+((heliWorth+(games*gameWorth))*helis))*10)/10*tuesdayWorth;
+        document.getElementById('teamAdd').innerHTML = Math.round((teamWorth+((heliWorth+(games*gameWorth))*helis))*10*tuesdayWorth)/10;
     };
     var nextCost = Math.floor(100 * Math.pow(helisExpo,helis));
     document.getElementById('heliCost').innerHTML = nextCost;
@@ -60,7 +60,7 @@ function resetLiam(){
         document.getElementById('heliAmount').innerHTML = helis;
         document.getElementById('heliCost').innerHTML = startHeliCost;
         document.getElementById('teamCost').innerHTML = startTeamCost;
-        document.getElementById('teamAdd').innerHTML = Math.round((teamWorth+((heliWorth+(games*gameWorth))*helis))*10)/10*tuesdayWorth;
+        document.getElementById('teamAdd').innerHTML = Math.round((teamWorth+((heliWorth+(games*gameWorth))*helis))*10*tuesdayWorth)/10;
         document.getElementById('loamPotention').innerHTML = 0;
     };
 }
@@ -77,7 +77,7 @@ function buyGame(){
         loams = Math.trunc(loams*10)/10;
         document.getElementById('gameAmount').innerHTML = games;
         document.getElementById('loamAmount').innerHTML = loams;
-        document.getElementById('teamAdd').innerHTML = Math.round((teamWorth+((heliWorth+(games*gameWorth))*helis))*10)/10*tuesdayWorth;
+        document.getElementById('teamAdd').innerHTML = Math.round((teamWorth+((heliWorth+(games*gameWorth))*helis))*10*tuesdayWorth)/10;
         document.getElementById('heliAdd').innerHTML = Math.round((0.5+(gameWorth*games))*10)/10;
     };
     var nextCost = Math.floor(startGamesCost * Math.pow(gamesExpo,games));
@@ -87,17 +87,17 @@ var tuesdays = 0;
 var startTuesdayCost = 15;
 var tuesdayWorth = 1;
 var tuesdayCost = 15;
-var tuesdaysExpo = 1.7;
+var tuesdaysExpo = 3;
 function buyTuesday(){
     var tuesdayCost = Math.floor(startTuesdayCost * Math.pow(tuesdaysExpo,tuesdays));
     if(loams >= tuesdayCost){
         tuesdays = tuesdays + 1;
-        tuesdayWorth = tuesdayWorth*2;
+        tuesdayWorth = tuesdayWorth*1.7;
     	loams = loams - tuesdayCost;
         loams = Math.trunc(loams*10)/10;
         document.getElementById('tuesdayAmount').innerHTML = tuesdays;
         document.getElementById('loamAmount').innerHTML = loams;
-        document.getElementById('teamAdd').innerHTML = Math.round((teamWorth+((heliWorth+(games*gameWorth))*helis))*10)/10*tuesdayWorth;
+        document.getElementById('teamAdd').innerHTML = Math.round((teamWorth+((heliWorth+(games*gameWorth))*helis))*10*tuesdayWorth)/10;
     };
     var nextCost = Math.floor(startTuesdayCost * Math.pow(tuesdaysExpo,tuesdays));
     document.getElementById('tuesdayCost').innerHTML = nextCost;
@@ -125,25 +125,43 @@ function buyMonday(){
         document.getElementById('loamAmount').innerHTML = loams;
     };
 }
+var autoSaRTeamUnlocked = false;
 var autoSaRTeam = false;
 function buyAutoSaRTeam(){
-    if(loams >= 250 && !autoSaRTeam){
-        autoSaRTeam = true;
+    if(autoSaRTeamUnlocked) {
+        autoSaRTeam = !autoSaRTeam;
+        if (document.getElementById('autoSaRTeamStatus').innerHTML == 'Disabled') {
+            document.getElementById('autoSaRTeamStatus').innerHTML = 'Enabled';
+        } else {
+            document.getElementById('autoSaRTeamStatus').innerHTML = 'Disabled';
+        }
+    }
+    if(loams >= 250 && !autoSaRTeamUnlocked){
+        autoSaRTeamUnlocked = true;
         loams = loams-250;
         loams = Math.trunc(loams*10)/10;
         document.getElementById('autoSaRTeamUnlockCost').innerHTML = "Already Bought";
         document.getElementById('loamAmount').innerHTML = loams;
     };
 }
+var autoHeliUnlocked = false;
 var autoHeli = false;
 function buyAutoHeli(){
-    if(loams >= 250 && !autoHeli){
-        autoHeli = true;
+    if(autoHeliUnlocked) {
+        autoHeli = !autoHeli;
+        if (document.getElementById('autoHeliStatus').innerHTML == 'Disabled') {
+            document.getElementById('autoHeliStatus').innerHTML = 'Enabled';
+        } else {
+            document.getElementById('autoHeliStatus').innerHTML = 'Disabled';
+        }
+    }
+    if(loams >= 250 && !autoHeliUnlocked){
+        autoHeliUnlocked = true;
         loams = loams-250;
         loams = Math.trunc(loams*10)/10;
         document.getElementById('autoHeliUnlockCost').innerHTML = "Already Bought";
         document.getElementById('loamAmount').innerHTML = loams;
-    };
+    }
 }
 
 window.setInterval(function(){
