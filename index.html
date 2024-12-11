@@ -5,23 +5,47 @@
     <title>Liam Incremental</title>
 </head>
 <body onload="load()">
-    <h1>Welcome to Liam Incremental!</h1>
-    <button onClick="liamClick(1)">Find A Liam</button>
-    <h1>You have found <span id="liamAmount">0</span> Liams</h1>
-    <button1 onClick="deleteSave()">DELETE SAVE</button1>
-    <h3>Search and Rescue Upgrades<br/></h3>
-    <button onClick="buySearchAndRescue()">Buy A Search And Rescue Team(+<span id="teamAdd">1</span> Liam/s)<br/>Cost: <span id="teamCost">10</span> Liams<br/>Teams: <span id="teamAmount">0</span></button>
-    <button onClick="buyHeli()">Buy A Helicopter(+<span id="heliAdd">0.5</span> to SaR Team Base)<br/>Cost: <span id="heliCost">100</span> Liams<br/>Helis: <span id="heliAmount">0</span></button>
-    <br/><button onClick="resetLiam()">Reach 1000 Liams to reset Liams and SaR Upgrades to gain <b><span id="loamPotention">0</span></b> Loams</button>
-    <div id="loam" style="opacity:0">
-        <br/><h1>Loams: <b><span id="loamAmount">0</span></b></h1>
-        <br><button onClick="buyGame()">Buy Game(Adds 0.1 to Helis)<br/>Cost: <span id="gameCost">5</span> Loams<br/>Games: <span id="gameAmount">0</span></button>
-        <button onClick="buyTuesday()">Buy Tuesday(1.7x SaR Team Upgrade for each Tuesday)<br/>Cost: <span id="tuesdayCost">15</span> Loams<br/>Tuesdays: <span id="tuesdayAmount">0</span></button>
-        <h2>Loam Unlocks<br/></h2>
-        <button onClick="buyMonday()">Buy Day After Monday Unlock(Start with 1 SaR Team after Loam reset)<br/>Cost: <span id="mondayUnlockCost">50 Loams</span><br/></button>
-        <button onClick="buyBetterLoam()">Buy Loam Unleashed Unlock(Increases amount of loam gained)<br/>Cost: <span id="loamUnlockCost">100 Loams</span><br/></button>
-        <button onClick="buyAutoSaRTeam()">Buy SaR Team Manager(Autobuys SaR Teams)<br/>Cost: <span id="autoSaRTeamUnlockCost">250 Loams</span><br/>Status(click to switch status): <span id="autoSaRTeamStatus">Disabled</span></button>
-        <button onClick="buyAutoHeli()">Buy Heli Manager(Autobuys Helis)<br/>Cost: <span id="autoHeliUnlockCost">250 Loams</span><br/>Status(click to switch status): <span id="autoHeliStatus">Disabled</span></button>
+    <div class="rightColumn border-right">
+
+        <div class="tab">
+            <button class="tablinks" onclick="openTab(event, 'Upgrades')">Upgrades</button>
+            <button class="tablinks" onclick="openTab(event, 'Unlocks')">Unlocks</button>
+            <button class="tablinks" onclick="openTab(event, 'Settings')">Settings</button>
+          </div>
+          
+          <!-- Tab content -->
+          <div id="Upgrades" class="tabcontent">
+            <h1>Welcome to Liam Incremental!</h1>
+            <button onClick="liamClick(1)">Find A Liam</button>
+            <h2>Search and Rescue Upgrades<br/></h2>
+            <button onClick="buySearchAndRescue()">Buy A Search And Rescue Team(+<span id="teamAdd">1</span> Liam/s)<br/>Cost: <span id="teamCost">10</span> Liams<br/>Teams: <span id="teamAmount">0</span></button>
+            <button onClick="buyHeli()">Buy A Helicopter(+<span id="heliAdd">0.5</span> to SaR Team Base)<br/>Cost: <span id="heliCost">100</span> Liams<br/>Helis: <span id="heliAmount">0</span></button>
+            <br/><button onClick="resetLiam()">Reach 1000 Liams to reset Liams and SaR Upgrades to gain <b><span id="loamPotention">0</span></b> Loams</button>
+            <div id="loam" style="opacity:0;">
+                <h2>Loam Upgrades</h2>
+                <br><button onClick="buyGame()">Buy Game(Adds 0.1 to Helis)<br/>Cost: <span id="gameCost">5</span> Loams<br/>Games: <span id="gameAmount">0</span></button>
+                <button onClick="buyTuesday()">Buy Tuesday(1.7x SaR Team Upgrade for each Tuesday)<br/>Cost: <span id="tuesdayCost">15</span> Loams<br/>Tuesdays: <span id="tuesdayAmount">0</span></button>
+            </div>
+        </div>
+          
+          <div id="Unlocks" class="tabcontent">
+            <div id="loam" style="opacity:0;">
+                <h2>Loam Unlocks<br/></h2>
+                <button onClick="buyMonday()">Buy Day After Monday Unlock(Start with 1 SaR Team after Loam reset)<br/>Cost: <span id="mondayUnlockCost">50 Loams</span><br/></button>
+                <button onClick="buyBetterLoam()">Buy Loam Unleashed Unlock(Increases amount of loam gained)<br/>Cost: <span id="loamUnlockCost">100 Loams</span><br/></button>
+                <button onClick="buyAutoSaRTeam()">Buy SaR Team Manager(Autobuys SaR Teams)<br/>Cost: <span id="autoSaRTeamUnlockCost">250 Loams</span><br/>Status(click to switch status): <span id="autoSaRTeamStatus">Disabled</span></button>
+                <button onClick="buyAutoHeli()">Buy Heli Manager(Autobuys Helis)<br/>Cost: <span id="autoHeliUnlockCost">250 Loams</span><br/>Status(click to switch status): <span id="autoHeliStatus">Disabled</span></button>
+            </div>
+          </div>
+          
+          <div id="Settings" class="tabcontent">
+            <button1 onClick="deleteSave()">DELETE SAVE</button1>
+            <h1>I'm warning you, this WILL delete your save! Only click if you really want to get rid of your progress(not like there is much progress you could get rid of, this game is pretty empty right now)</h1>
+          </div>
+    </div>
+    <div>
+        <h1 style="text-align: center;"><span id="liamAmount">0</span></h1><h2 style="text-align: center;">Liams</h2>
+        <br/><h1 style="text-align: center;"><span id="loamAmount">0</span></h1><h2 style="text-align: center;"> Loams</h2>
     </div>
 </body> <script type="text/javascript" src="main.js"></script>
 </html>
