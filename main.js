@@ -52,7 +52,7 @@ function resetLiam(){
         loamUnlocked = true;
         loams = Math.trunc((loams+getLoamEquation())*10)/10;
         helis=0;
-        teams=0;
+        teams=mondayAmount;
         liams=0;
         document.getElementById('teamAmount').innerHTML = teams;
         document.getElementById('liamAmount').innerHTML = liams;
@@ -113,6 +113,38 @@ function buyBetterLoam(){
         document.getElementById('loamAmount').innerHTML = loams;
     };
 }
+var isMonday = false;
+var mondayAmount = 0;
+function buyMonday(){
+    if(loams >= 50 && !isMonday){
+        isMonday = true;
+        loams = loams-50;
+        mondayAmount = 1;
+        loams = Math.trunc(loams*10)/10;
+        document.getElementById('mondayUnlockCost').innerHTML = "Already Bought";
+        document.getElementById('loamAmount').innerHTML = loams;
+    };
+}
+var autoSaRTeam = false;
+function buyAutoSaRTeam(){
+    if(loams >= 250 && !autoSaRTeam){
+        autoSaRTeam = true;
+        loams = loams-250;
+        loams = Math.trunc(loams*10)/10;
+        document.getElementById('autoSaRTeamUnlockCost').innerHTML = "Already Bought";
+        document.getElementById('loamAmount').innerHTML = loams;
+    };
+}
+var autoHeli = false;
+function buyAutoHeli(){
+    if(loams >= 250 && !autoHeli){
+        autoHeli = true;
+        loams = loams-250;
+        loams = Math.trunc(loams*10)/10;
+        document.getElementById('autoHeliUnlockCost').innerHTML = "Already Bought";
+        document.getElementById('loamAmount').innerHTML = loams;
+    };
+}
 
 window.setInterval(function(){
     //console.log((Math.pow((liams-1000)/100,0.9)));
@@ -121,9 +153,16 @@ window.setInterval(function(){
         } else {
             document.getElementById('loamPotention').innerHTML = 0;
         }
+        document.getElementById('loamAmount').innerHTML = Math.round(loams*10)/10;
         if (loamUnlocked == true) {
             document.getElementById('loam').style.opacity = 1;
-        } 
+        }
+        if (autoSaRTeam) {
+            buySearchAndRescue();
+        }
+        if (autoHeli) {
+            buyHeli();
+        }
 }, 10);
 
 window.setInterval(function(){
