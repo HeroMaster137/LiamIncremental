@@ -32,3 +32,23 @@ h2 {
     width: 50%;
     padding: 10px;
 }
+button1 {
+    background-color: #c20000; /* Green */
+    border: none;
+    border-radius: 2px;
+    color: white;
+    padding: 10px 10px;
+    margin: 3px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+}
+button1:hover {
+    background-color: #c62b2b;
+    opacity:0.95;
+}
+button1:active {
+    opacity:0.95;
+    background-color: #620808;
+}

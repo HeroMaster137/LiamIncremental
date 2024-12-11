@@ -4,10 +4,11 @@
     <meta charset="UTF-8" />
     <title>Liam Incremental</title>
 </head>
-<body>
+<body onload="load()">
     <h1>Welcome to Liam Incremental!</h1>
     <button onClick="liamClick(1)">Find A Liam</button>
     <h1>You have found <span id="liamAmount">0</span> Liams</h1>
+    <button1 onClick="deleteSave()">DELETE SAVE</button1>
     <h3>Search and Rescue Upgrades<br/></h3>
     <button onClick="buySearchAndRescue()">Buy A Search And Rescue Team(+<span id="teamAdd">1</span> Liam/s)<br/>Cost: <span id="teamCost">10</span> Liams<br/>Teams: <span id="teamAmount">0</span></button>
     <button onClick="buyHeli()">Buy A Helicopter(+<span id="heliAdd">0.5</span> to SaR Team Base)<br/>Cost: <span id="heliCost">100</span> Liams<br/>Helis: <span id="heliAmount">0</span></button>

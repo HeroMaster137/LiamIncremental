@@ -10,14 +10,88 @@ var heliWorth = 0.5;
 var loamEquation = 0.75;
 
 var loamUnlocked = false;
+
 function getLoamEquation() {
     return (Math.pow((liams-1000)/100,loamEquation));
 }
+
 function liamClick(number){
     liams = Math.trunc((liams + number)*10)/10;
     document.getElementById('liamAmount').innerHTML = liams;
     
 }
+
+function save(){
+    var save = {liams:liams, loams: loams, helis: helis, heliWorth: heliWorth, loamEquation: loamEquation, loamUnlocked: loamUnlocked, teams: teams, teamWorth: teamWorth, games: games, gameWorth: gameWorth, tuesdays: tuesdays, tuesdayWorth: tuesdayWorth, isBetterLoam: isBetterLoam, isMonday: isMonday, mondayAmount: mondayAmount, autoHeli: autoHeli, autoHeliUnlocked: autoHeliUnlocked, autoSaRTeam: autoSaRTeam, autoSaRTeamUnlocked: autoSaRTeamUnlocked};
+    localStorage.setItem("save",JSON.stringify(save));
+}
+
+function load(){
+    var savegame = JSON.parse(localStorage.getItem("save"));
+    if (typeof savegame.liams !== "undefined") liams = savegame.liams;
+    if (typeof savegame.loams !== "undefined") loams = savegame.loams;
+    if (typeof savegame.helis !== "undefined") {helis = savegame.helis;
+        document.getElementById('heliAmount').innerHTML = helis;
+        document.getElementById('heliCost').innerHTML = Math.floor(100 * Math.pow(helisExpo,helis));
+    }
+    if (typeof savegame.heliWorth !== "undefined") heliWorth = savegame.heliWorth;
+    if (typeof savegame.loamEquation !== "undefined") loamEquation = savegame.loamEquation;
+    if (typeof savegame.loamUnlocked !== "undefined") loamUnlocked = savegame.loamUnlocked;
+    if (typeof savegame.teams !== "undefined") {teams = savegame.teams;
+        document.getElementById('teamAmount').innerHTML = teams;
+        document.getElementById('teamCost').innerHTML = Math.floor(10 * Math.pow(teamsExpo,teams));
+    }
+    if (typeof savegame.teamWorth !== "undefined") teamWorth = savegame.teamWorth;
+    if (typeof savegame.games !== "undefined") {games = savegame.games;
+        document.getElementById('gameAmount').innerHTML = games;
+        document.getElementById('gameCost').innerHTML = Math.floor(startGamesCost * Math.pow(gamesExpo,games));
+    }
+    if (typeof savegame.gameWorth !== "undefined") gameWorth = savegame.gameWorth;
+    if (typeof savegame.tuesdays !== "undefined") {tuesdays = savegame.tuesdays;
+        document.getElementById('tuesdayAmount').innerHTML = tuesdays;
+        document.getElementById('tuesdayCost').innerHTML = Math.floor(startTuesdayCost * Math.pow(tuesdaysExpo,tuesdays));
+    }
+    if (typeof savegame.tuesdayWorth !== "undefined") tuesdayWorth = savegame.tuesdayWorth;
+    if (typeof savegame.isBetterLoam !== "undefined") {isBetterLoam = savegame.isBetterLoam;
+        if(isBetterLoam) {
+            document.getElementById('loamUnlockCost').innerHTML = "Already Bought";
+        }
+    }
+    if (typeof savegame.isMonday !== "undefined") {isMonday = savegame.isMonday;
+        if(isMonday) {
+            document.getElementById('mondayUnlockCost').innerHTML = "Already Bought";
+        }
+    }
+    if (typeof savegame.mondayAmount !== "undefined") mondayAmount = savegame.mondayAmount;
+    if (typeof savegame.autoHeli !== "undefined") {autoHeli = savegame.autoHeli;
+        if(autoHeli) {
+            document.getElementById('autoHeliStatus').innerHTML = 'Enabled';
+        }
+    }
+    if (typeof savegame.autoHeliUnlocked !== "undefined") {autoHeliUnlocked = savegame.autoHeliUnlocked;
+        if(autoHeliUnlocked) {
+            document.getElementById('autoHeliUnlockCost').innerHTML = "Already Bought";
+        }
+    }
+    if (typeof savegame.autoSaRTeam !== "undefined") {autoSaRTeam = savegame.autoSaRTeam;
+        if(autoSaRTeam) {
+            document.getElementById('autoHeliStatus').innerHTML = 'Enabled';
+        }
+    }
+    if (typeof savegame.autoSaRTeam !== "undefined") {autoSaRTeamUnlocked = savegame.autoSaRTeamUnlocked;
+        if(autoSaRTeamUnlocked) {
+            document.getElementById('autoSaRTeamUnlockCost').innerHTML = "Already Bought";
+        }
+    }
+    document.getElementById('teamAdd').innerHTML = Math.round((teamWorth+((heliWorth+(games*gameWorth))*helis))*10*tuesdayWorth)/10;
+    document.getElementById('heliAdd').innerHTML = Math.round((0.5+(gameWorth*games))*10)/10;
+}
+
+function deleteSave(){
+    localStorage.removeItem("save");
+    location.reload();
+}
+
 function buyHeli(){
     var heliCost = Math.floor(100 * Math.pow(helisExpo,helis));
     if(liams >= heliCost){
@@ -181,8 +255,13 @@ window.setInterval(function(){
         if (autoHeli) {
             buyHeli();
         }
+        document.getElementById('liamAmount').innerHTML = Math.round(liams*10)/10;
 }, 10);
 
 window.setInterval(function(){
     liamClick(teams*((teamWorth+((heliWorth+(games*gameWorth))*helis))*tuesdayWorth));
 }, 1000);
+
+window.setInterval(function(){
+    save();
+}, 5000)
