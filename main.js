@@ -269,7 +269,8 @@ window.setInterval(function(){
         }
         document.getElementById('loamAmount').innerHTML = Math.round(loams*10)/10;
         if (loamUnlocked == true) {
-            document.getElementById('loam').style.opacity = 1;
+            document.getElementByID('loam1').style.opacity = 1;
+            document.getElementByID('loam2').style.opacity = 1;
         }
         if (autoSaRTeam) {
             buySearchAndRescue();

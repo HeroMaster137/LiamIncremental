@@ -16,6 +16,7 @@ button {
 button:hover {
     background-color: #3c3678;
     opacity:0.95;
+    cursor: pointer;
 }
 button:active {
     opacity:0.95;
@@ -42,6 +43,7 @@ button1 {
 button1:hover {
     background-color: #c62b2b;
     opacity:0.95;
+    cursor: pointer;
 }
 button1:active {
     opacity:0.95;
@@ -92,4 +94,8 @@ button1:active {
     display: none;
     padding: 6px 12px;
     border-top: none;
+  }
+
+  .loam {
+    opacity: 0;
   }
