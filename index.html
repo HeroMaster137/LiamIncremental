@@ -21,15 +21,15 @@
             <button onClick="buySearchAndRescue()">Buy A Search And Rescue Team(+<span id="teamAdd">1</span> Liam/s)<br/>Cost: <span id="teamCost">10</span> Liams<br/>Teams: <span id="teamAmount">0</span></button>
             <button onClick="buyHeli()">Buy A Helicopter(+<span id="heliAdd">0.5</span> to SaR Team Base)<br/>Cost: <span id="heliCost">100</span> Liams<br/>Helis: <span id="heliAmount">0</span></button>
             <br/><button onClick="resetLiam()">Reach 1000 Liams to reset Liams and SaR Upgrades to gain <b><span id="loamPotention">0</span></b> Loams</button>
-            <div id="loam1">
+            <div id="loam1" style="opacity: 0;">
                 <h2>Loam Upgrades</h2>
-                <br><button id="loamButton" onClick="buyGame()">Buy Game(Adds 0.1 to Helis)<br/>Cost: <span id="gameCost">5</span> Loams<br/>Games: <span id="gameAmount">0</span></button>
+                <br><button id="loamButton" onClick="buyGame()" disabled>Buy Game(Adds 0.1 to Helis)<br/>Cost: <span id="gameCost">5</span> Loams<br/>Games: <span id="gameAmount">0</span></button>
                 <button onClick="buyTuesday()">Buy Tuesday(1.7x SaR Team Upgrade for each Tuesday)<br/>Cost: <span id="tuesdayCost">15</span> Loams<br/>Tuesdays: <span id="tuesdayAmount">0</span></button>
             </div>
         </div>
           
           <div id="Unlocks" class="tabcontent">
-            <div id="loam2">
+            <div id="loam2" style="opacity: 0;">
                 <h2>Loam Unlocks<br/></h2>
                 <button onClick="buyMonday()">Buy Day After Monday Unlock(Start with 1 SaR Team after Loam reset)<br/>Cost: <span id="mondayUnlockCost">50 Loams</span><br/></button>
                 <button onClick="buyBetterLoam()">Buy Loam Unleashed Unlock(Increases amount of loam gained)<br/>Cost: <span id="loamUnlockCost">100 Loams</span><br/></button>
