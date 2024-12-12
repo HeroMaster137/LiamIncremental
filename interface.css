@@ -53,7 +53,7 @@ button1:active {
 .rightColumn {
     float:right;
     margin: 0;
-    width: 90%
+    width: 85%
 }
 .leftColumn {
     float:left;
@@ -97,12 +97,24 @@ button1:active {
     border-top: none;
   }
 
-  .loam {
-    opacity: 0;
-  }
-  .loamButton:hover {
-    cursor:default;
-  }
-  .loamUnButton:hover {
-    cursor:pointer;
-  }
+
+.loam {
+  opacity: 0;
+}
+.loamButton:hover {
+  cursor:default;
+}
+.loamUnButton:hover {
+  cursor:pointer;
+}
+
+.larry {
+  opacity: 0;
+}
+.larryButton:hover {
+  cursor:default;
+}
+.larryUnButton:hover {
+  cursor:pointer;
+}
+
