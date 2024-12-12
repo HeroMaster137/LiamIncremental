@@ -7,12 +7,13 @@
 <body onload="load()">
     <div class="rightColumn border-right">
 
+
         <div class="tab">
             <button class="tablinks" onclick="openTab(event, 'Upgrades')">Upgrades</button>
             <button class="tablinks" onclick="openTab(event, 'Unlocks')">Unlocks</button>
             <button class="tablinks" onclick="openTab(event, 'Settings')">Settings</button>
           </div>
-          
+         
           <!-- Tab content -->
           <div id="Upgrades" class="tabcontent">
             <h1>Welcome to Liam Incremental!</h1>
@@ -22,12 +23,16 @@
             <button onClick="buyHeli()">Buy A Helicopter(+<span id="heliAdd">0.5</span> to SaR Team Base)<br/>Cost: <span id="heliCost">100</span> Liams<br/>Helis: <span id="heliAmount">0</span></button>
             <br/><button onClick="resetLiam()">Reach 1000 Liams to reset Liams and SaR Upgrades to gain <b><span id="loamPotention">0</span></b> Loams</button>
             <div id="loam1" style="opacity: 0;">
-                <h2>Loam Upgrades</h2>
+                <h2>Loam Upgrades<br></h2>
                 <br><button onClick="buyGame()" class="loamButton" disabled>Buy Game(Adds 0.1 to Helis)<br/>Cost: <span id="gameCost">5</span> Loams<br/>Games: <span id="gameAmount">0</span></button>
                 <button onClick="buyTuesday()" class="loamButton" disabled>Buy Tuesday(1.7x SaR Team Upgrade for each Tuesday)<br/>Cost: <span id="tuesdayCost">15</span> Loams<br/>Tuesdays: <span id="tuesdayAmount">0</span></button>
+                <br/><button onClick="resetLoam()">Reach 10000 Liams to reset Loams, Loam Upgrades, Liams, and SaR Upgrades to gain <b><span id="larryPotention">0</span></b> Larrys</button>
+            </div>
+            <div id="larry1" style="opacity: 0;">
+                <br><h2>Larry Upgrades</h2>
             </div>
         </div>
-          
+         
           <div id="Unlocks" class="tabcontent">
             <div id="loam2" style="opacity: 0;">
                 <h2>Loam Unlocks<br/></h2>
@@ -36,8 +41,12 @@
                 <button onClick="buyAutoSaRTeam()" class="loamButton" disabled>Buy SaR Team Manager(Autobuys SaR Teams)<br/>Cost: <span id="autoSaRTeamUnlockCost">250 Loams</span><br/>Status(click to switch status): <span id="autoSaRTeamStatus">Disabled</span></button>
                 <button onClick="buyAutoHeli()" class="loamButton" disabled>Buy Heli Manager(Autobuys Helis)<br/>Cost: <span id="autoHeliUnlockCost">250 Loams</span><br/>Status(click to switch status): <span id="autoHeliStatus">Disabled</span></button>
             </div>
+            <div id="larry2" style="opacity: 0;">
+                <br><h2>Larry Unlocks<br/></h2>
+                <button onClick="buyYikes()" class="larryButton" disabled>Buy Yikes(Don't lose SaR Upgrades on Loam Reset)<br/>Cost: <span id="yikesUnlockCost">5 Larrys</span></button>
+            </div>
           </div>
-          
+         
           <div id="Settings" class="tabcontent">
             <button1 onClick="deleteSave()">DELETE SAVE</button1>
             <h1>I'm warning you, this WILL delete your save! Only click if you really want to get rid of your progress(not like there is much progress you could get rid of, this game is pretty empty right now)</h1>
@@ -45,7 +54,8 @@
     </div>
     <div>
         <h1 style="text-align: center;"><span id="liamAmount">0</span></h1><h2 style="text-align: center;">Liams</h2>
-        <br/><h1 style="text-align: center;"><span id="loamAmount">0</span></h1><h2 style="text-align: center;"> Loams</h2>
+        <br/><h1 id = "loam3" style="text-align: center;"><span id="loamAmount">0</span></h1><h2 id = "loam4" style="text-align: center;"> Loams</h2>
+        <br/><h1 id = "larry3" style="text-align: center;"><span id="larryAmount">0</span></h1><h2 id = "larry4" style="text-align: center;"> Larrys</h2>
     </div>
 </body> <script type="text/javascript" src="main.js"></script>
 </html>
