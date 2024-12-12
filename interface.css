@@ -1,5 +1,6 @@
 body {
-    background:#7b7793;
+    background-image: url("LoamsHell.png");
+                    background-repeat: repeat;
 }
 button {
     background-color: #28225e; /* Green */
