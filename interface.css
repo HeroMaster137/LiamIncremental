@@ -3,10 +3,10 @@ body {
                     background-repeat: repeat;
 }
 button {
-    background-color: #28225e; /* Green */
+    background-color: #E97451; /* Green */
     border: none;
     border-radius: 2px;
-    color: white;
+    color: red;
     padding: 10px 10px;
     margin: 3px;
     text-align: center;
@@ -15,7 +15,7 @@ button {
     font-size: 15px;
 }
 button:hover {
-    background-color: #3c3678;
+    background-color: #880808;
     opacity:0.95;
     cursor: pointer;
 }
@@ -30,10 +30,10 @@ h2 {
     margin: 4px;
 }
 button1 {
-    background-color: #c20000; /* Green */
+    background-color: #E97451; /* Green */
     border: 5px black;
     border-radius: 2px;
-    color: white;
+    color: red;
     padding: 10px 10px;
     margin: 3px;
     text-align: center;
@@ -42,7 +42,7 @@ button1 {
     font-size: 30px;
 }
 button1:hover {
-    background-color: #c62b2b;
+    background-color: #880808;
     opacity:0.95;
     cursor: pointer;
 }
