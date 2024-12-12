@@ -4,4 +4,4 @@ So, this is my first incremental game, Liam Incremental(don't pay attention to t
 
 Roadmap(Not detailed):
 1. Make it actually look good(sort of complete)
-2. New layer(told you it's not going to be detailed)
+2. Balancing
