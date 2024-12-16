@@ -1,6 +1,7 @@
 var liams = 0;
 var loams = 0;
 var larrys = 0;
+var jokes = 0;
 var addAmount = 1;
 
 var helis = 0;
@@ -10,6 +11,7 @@ var helisExpo = 1.5;
 var heliWorth = 0.5;
 var loamEquation = 0.75;
 var larryEquation= 0.75;
+var jokeEquation = 0.5;
 
 var loamUnlocked = false;
 var larryUnlocked = false;
@@ -23,14 +25,25 @@ function getLarryEquation() {
     return (Math.pow((liams-100000)/500,larryEquation));
 }
 
+function getJokeEquation() {
+    return (Math.pow((larrys/10),jokeEquation));
+}
+
 function liamClick(number){
     liams = Math.trunc((liams + number)*10)/10;
-    document.getElementById('liamAmount').innerHTML = liams;
-    
+    document.getElementById('liamAmount').innerHTML = liams; 
+}
+function loamClick(number) {
+    loams = Math.trunc((loams + number)*10)/10;
+    document.getElementById('loamAmount').innerHTML = loams;
+}
+function jokeClick(number) {
+    jokes = Math.trunc((jokes + number)*10)/10;
+    document.getElementById('jokeAmount').innerHTML = jokes;
 }
 
 function save(){
-    var save = {liams:liams, loams: loams, helis: helis, heliWorth: heliWorth, loamEquation: loamEquation, loamUnlocked: loamUnlocked, teams: teams, teamWorth: teamWorth, games: games, gameWorth: gameWorth, tuesdays: tuesdays, tuesdayWorth: tuesdayWorth, isBetterLoam: isBetterLoam, isMonday: isMonday, mondayAmount: mondayAmount, autoHeli: autoHeli, autoHeliUnlocked: autoHeliUnlocked, autoSaRTeam: autoSaRTeam, autoSaRTeamUnlocked: autoSaRTeamUnlocked, larryEquation: larryEquation, larryUnlocked: larryUnlocked, unResetLiams: unResetLiams, larrys:larrys, choirs: choirs};
+    var save = {liams:liams, loams: loams, helis: helis, heliWorth: heliWorth, loamEquation: loamEquation, loamUnlocked: loamUnlocked, teams: teams, teamWorth: teamWorth, games: games, gameWorth: gameWorth, tuesdays: tuesdays, tuesdayWorth: tuesdayWorth, isBetterLoam: isBetterLoam, isMonday: isMonday, mondayAmount: mondayAmount, autoHeli: autoHeli, autoHeliUnlocked: autoHeliUnlocked, autoSaRTeam: autoSaRTeam, autoSaRTeamUnlocked: autoSaRTeamUnlocked, larryEquation: larryEquation, larryUnlocked: larryUnlocked, unResetLiams: unResetLiams, larrys:larrys, choirs: choirs, jokes: jokes};
     localStorage.setItem("save",JSON.stringify(save));
 }
 
@@ -101,6 +114,16 @@ function load(){
     if (typeof savegame.larrys !== "undefined") {larrys = savegame.larrys;
         if(larryUnlocked) {
             document.getElementById("larryAmount").innerHTML = larrys;
+        }
+    }
+    if (typeof savegame.jokes !== "undefined") {jokes = savegame.jokes;
+        if(larryUnlocked) {
+            document.getElementById("jokeAmount").innerHTML = jokes;
+        }
+    }
+    if (typeof savegame.jokesUnlocked !== "undefined") {jokesUnlocked = savegame.jokesUnlocked;
+        if(jokesUnlocked) {
+            document.getElementById("jokesUnlockCost").innerHTML = "Already Bought";
         }
     }
     if (typeof savegame.choirs !== "undefined") {choirs = savegame.choirs;
@@ -337,9 +360,15 @@ function buyYikes(){
         document.getElementById('larryAmount').innerHTML = larrys;
     };
 }
-function loamClick(number) {
-    loams = Math.trunc((loams + number)*10)/10;
-    document.getElementById('loamAmount').innerHTML = loams;
+var jokesUnlocked = false;
+function buyJokes(){
+    if(larrys >= 20 && !jokesUnlocked){
+        jokesUnlocked = true;
+        larrys = larrys-20;
+        larrys = Math.trunc(larrys*10)/10;
+        document.getElementById('jokeUnlockCost').innerHTML = "Already Bought";
+        document.getElementById('larryAmount').innerHTML = larrys;
+    };
 }
 var choirs = 0;
 var startChoirCost = 25;
@@ -393,12 +422,16 @@ window.setInterval(function(){
         document.getElementById('liamAmount').innerHTML = Math.round(liams*10)/10;
         document.getElementById('loamAmount').innerHTML = Math.round(loams*10)/10;
         document.getElementById('larryAmount').innerHTML = Math.round(larrys*10)/10;
+        document.getElementById('jokeAmount').innerHTML = Math.round(jokes*10)/10;
 }, 10);
 
 window.setInterval(function(){
     liamClick(teams*((teamWorth+((heliWorth+(games*gameWorth))*helis))*tuesdayWorth));
     if(getLoamEquation()>=0) {
         loamClick(getLoamEquation()*((choirs*4)/100));
+    }
+    if(jokesUnlocked) {
+        jokeClick(getJokeEquation());
     }
 }, 1000);
 
