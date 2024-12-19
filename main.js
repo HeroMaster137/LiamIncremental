@@ -43,7 +43,7 @@ function jokeClick(number) {
 }
 
 function save(){
-    var save = {liams:liams, loams: loams, helis: helis, heliWorth: heliWorth, loamEquation: loamEquation, loamUnlocked: loamUnlocked, teams: teams, teamWorth: teamWorth, games: games, gameWorth: gameWorth, tuesdays: tuesdays, tuesdayWorth: tuesdayWorth, isBetterLoam: isBetterLoam, isMonday: isMonday, mondayAmount: mondayAmount, autoHeli: autoHeli, autoHeliUnlocked: autoHeliUnlocked, autoSaRTeam: autoSaRTeam, autoSaRTeamUnlocked: autoSaRTeamUnlocked, larryEquation: larryEquation, larryUnlocked: larryUnlocked, unResetLiams: unResetLiams, larrys:larrys, choirs: choirs, jokes: jokes};
+    var save = {liams:liams, loams: loams, helis: helis, heliWorth: heliWorth, loamEquation: loamEquation, loamUnlocked: loamUnlocked, teams: teams, teamWorth: teamWorth, games: games, gameWorth: gameWorth, tuesdays: tuesdays, tuesdayWorth: tuesdayWorth, isBetterLoam: isBetterLoam, isMonday: isMonday, mondayAmount: mondayAmount, autoHeli: autoHeli, autoHeliUnlocked: autoHeliUnlocked, autoSaRTeam: autoSaRTeam, autoSaRTeamUnlocked: autoSaRTeamUnlocked, larryEquation: larryEquation, larryUnlocked: larryUnlocked, unResetLiams: unResetLiams, larrys:larrys, choirs: choirs, jokes: jokes, jokesUnlocked:jokesUnlocked, jortsUnlocked: jortsUnlocked, reeks: reeks, teamsExpo: teamsExpo, helisExpo: helisExpo, choirs: choirs};
     localStorage.setItem("save",JSON.stringify(save));
 }
 
@@ -51,6 +51,8 @@ function load(){
     var savegame = JSON.parse(localStorage.getItem("save"));
     if (typeof savegame.liams !== "undefined") liams = savegame.liams;
     if (typeof savegame.loams !== "undefined") loams = savegame.loams;
+    if (typeof savegame.helisExpo !== "undefined") helisExpo = savegame.helisExpo;
+    if (typeof savegame.teamsExpo !== "undefined") teamsExpo = savegame.teamsExpo;
     if (typeof savegame.helis !== "undefined") {helis = savegame.helis;
         document.getElementById('heliAmount').innerHTML = helis;
         document.getElementById('heliCost').innerHTML = Math.floor(100 * Math.pow(helisExpo,helis));
@@ -123,12 +125,21 @@ function load(){
     }
     if (typeof savegame.jokesUnlocked !== "undefined") {jokesUnlocked = savegame.jokesUnlocked;
         if(jokesUnlocked) {
-            document.getElementById("jokesUnlockCost").innerHTML = "Already Bought";
+            document.getElementById("jokeUnlockCost").innerHTML = "Already Bought";
         }
     }
     if (typeof savegame.choirs !== "undefined") {choirs = savegame.choirs;
         document.getElementById('choirAmount').innerHTML = choirs;
         document.getElementById('choirCost').innerHTML = Math.floor(100 * Math.pow(choirsExpo,choirs));
+    }
+    if (typeof savegame.reeks !== "undefined") {reeks = savegame.reeks;
+        document.getElementById('reeksAmount').innerHTML = reeks;
+        document.getElementById('reeksCost').innerHTML = Math.floor(100 * Math.pow(reeksExpo,reeks));
+    }
+    if (typeof savegame.jortsUnlocked !== "undefined") {jortsUnlocked = savegame.jortsUnlocked;
+        if(jortsUnlocked) {
+            document.getElementById("jortsUnlockCost").innerHTML = "Already Bought";
+        }
     }
     document.getElementById('teamAdd').innerHTML = Math.round((teamWorth+((heliWorth+(games*gameWorth))*helis))*10*tuesdayWorth)/10;
     document.getElementById('heliAdd').innerHTML = Math.round((0.5+(gameWorth*games))*10)/10;
@@ -165,7 +176,8 @@ function buyHeli(){
     var heliCost = Math.floor(100 * Math.pow(helisExpo,helis));
     if(liams >= heliCost){
         helis = helis + 1;
-    	liams = liams - heliCost;
+        if(!jortsUnlocked) {
+    	liams = liams - heliCost; }
         document.getElementById('heliAmount').innerHTML = helis;
         document.getElementById('liamAmount').innerHTML = Math.round(liams*10)/10;
         document.getElementById('teamAdd').innerHTML = Math.round((teamWorth+((heliWorth+(games*gameWorth))*helis))*10*tuesdayWorth)/10;
@@ -183,7 +195,8 @@ function buySearchAndRescue(){
     var teamCost = Math.floor(10 * Math.pow(teamsExpo,teams));
     if(liams >= teamCost){
         teams = teams + 1;
-    	liams = liams - teamCost;
+        if (!jortsUnlocked) {
+    	liams = liams - teamCost; }
         document.getElementById('teamAmount').innerHTML = teams;
         document.getElementById('liamAmount').innerHTML = Math.round(liams*10)/10;
     };
@@ -218,7 +231,8 @@ function buyGame(){
     var gameCost = Math.floor(startGamesCost * Math.pow(gamesExpo,games));
     if(loams >= gameCost){
         games = games + 1;
-    	loams = loams - gameCost;
+        if (!jortsUnlocked) {
+    	loams = loams - gameCost; }
         loams = Math.trunc(loams*10)/10;
         document.getElementById('gameAmount').innerHTML = games;
         document.getElementById('loamAmount').innerHTML = loams;
@@ -238,7 +252,8 @@ function buyTuesday(){
     if(loams >= tuesdayCost){
         tuesdays = tuesdays + 1;
         tuesdayWorth = tuesdayWorth*1.7;
-    	loams = loams - tuesdayCost;
+        if (!jortsUnlocked) {
+    	loams = loams - tuesdayCost; }
         loams = Math.trunc(loams*10)/10;
         document.getElementById('tuesdayAmount').innerHTML = tuesdays;
         document.getElementById('loamAmount').innerHTML = loams;
@@ -247,12 +262,33 @@ function buyTuesday(){
     var nextCost = Math.floor(startTuesdayCost * Math.pow(tuesdaysExpo,tuesdays));
     document.getElementById('tuesdayCost').innerHTML = nextCost;
 }
+var reeks = 0;
+var startReeksCost = 100;
+var reeksWorth = 1;
+var reeksCost = 100;
+var reeksExpo = 3;
+function buyReeks(){
+    var reeksCost = Math.floor(startReeksCost * Math.pow(reeksExpo,reeks));
+    if(loams >= reeksCost && reeks < 10){
+        reeks = reeks + 1;
+        teamsExpo = teamsExpo - 0.03;
+        if (!jortsUnlocked) {
+    	loams = loams - reeksCost; }
+        loams = Math.trunc(loams*10)/10;
+        document.getElementById('reeksAmount').innerHTML = reeks;
+        document.getElementById('heliCost').innerHTML = Math.floor(100 * Math.pow(helisExpo,helis));
+        document.getElementById('teamCost').innerHTML = Math.floor(10 * Math.pow(teamsExpo,teams));
+    };
+    var nextCost = Math.floor(startReeksCost * Math.pow(reeksExpo,reeks));
+    document.getElementById('reeksCost').innerHTML = nextCost;
+}
 var isBetterLoam = false;
 function buyBetterLoam(){
     if(loams >= 100 && !isBetterLoam){
         isBetterLoam = true;
         loamEquation = 0.8;
-        loams = loams-100;
+        if(!jortsUnlocked) {
+        loams = loams-100; }
         loams = Math.trunc(loams*10)/10;
         document.getElementById('loamUnlockCost').innerHTML = "Already Bought";
         document.getElementById('loamAmount').innerHTML = loams;
@@ -263,7 +299,8 @@ var mondayAmount = 0;
 function buyMonday(){
     if(loams >= 50 && !isMonday){
         isMonday = true;
-        loams = loams-50;
+        if(!jortsUnlocked) {
+        loams = loams-50; }
         mondayAmount = 1;
         loams = Math.trunc(loams*10)/10;
         document.getElementById('mondayUnlockCost').innerHTML = "Already Bought";
@@ -283,7 +320,8 @@ function buyAutoSaRTeam(){
     }
     if(loams >= 250 && !autoSaRTeamUnlocked){
         autoSaRTeamUnlocked = true;
-        loams = loams-250;
+        if (!jortsUnlocked) {
+        loams = loams-250; }
         loams = Math.trunc(loams*10)/10;
         document.getElementById('autoSaRTeamUnlockCost').innerHTML = "Already Bought";
         document.getElementById('loamAmount').innerHTML = loams;
@@ -302,7 +340,8 @@ function buyAutoHeli(){
     }
     if(loams >= 250 && !autoHeliUnlocked){
         autoHeliUnlocked = true;
-        loams = loams-250;
+        if (!jortsUnlocked) {
+        loams = loams-250; }
         loams = Math.trunc(loams*10)/10;
         document.getElementById('autoHeliUnlockCost').innerHTML = "Already Bought";
         document.getElementById('loamAmount').innerHTML = loams;
@@ -370,6 +409,16 @@ function buyJokes(){
         document.getElementById('larryAmount').innerHTML = larrys;
     };
 }
+var jortsUnlocked = false;
+function buyJorts(){
+    if(larrys >= 20 && !jortsUnlocked){
+        jortsUnlocked = true;
+        larrys = larrys-100;
+        larrys = Math.trunc(larrys*10)/10;
+        document.getElementById('jortsUnlockCost').innerHTML = "Already Bought";
+        document.getElementById('larryAmount').innerHTML = larrys;
+    };
+}
 var choirs = 0;
 var startChoirCost = 25;
 var choirCost = 25;
@@ -413,6 +462,11 @@ window.setInterval(function(){
             document.getElementById('larry4').style.opacity = 1;
             document.querySelectorAll(".larryButton").forEach(e => e.disabled = false)
         }
+        if (jokesUnlocked == true) {
+            document.getElementById('joke1').style.opacity = 1;
+            document.getElementById('joke2').style.opacity = 1;
+            document.querySelectorAll(".jokeButton").forEach(e => e.disabled = false)
+        }
         if (autoSaRTeam) {
             buySearchAndRescue();
         }
@@ -437,4 +491,4 @@ window.setInterval(function(){
 
 window.setInterval(function(){
     save();
-}, 5000)
+}, 10000)
