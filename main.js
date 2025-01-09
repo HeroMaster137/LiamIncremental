@@ -29,17 +29,32 @@ function getJokeEquation() {
     return (Math.pow((larrys/10),jokeEquation));
 }
 
+function convrt(number) {
+    postfixes = ['', 'k', 'M', 'B', 'T', "Qd", "Qt", "Sx", "Sp", "Oc", "No", "Dc", "UDc", "DDc"]
+    count = 0
+    while (number >= 10) {
+        number /= 10
+        count++
+    }
+    if(count>=postfixes.length) {
+        return Math.trunc(number*100)/100 + "e" + count;
+    }
+    else {
+        return Math.trunc(number*100)/100 + postfixes[count/3];
+    }
+} 
+
 function liamClick(number){
-    liams = Math.trunc((liams + number)*10)/10;
-    document.getElementById('liamAmount').innerHTML = liams; 
+    liams = liams + number;
+    document.getElementById('liamAmount').innerHTML = convrt(liams); 
 }
 function loamClick(number) {
-    loams = Math.trunc((loams + number)*10)/10;
-    document.getElementById('loamAmount').innerHTML = loams;
+    loams = loams + number;
+    document.getElementById('loamAmount').innerHTML = convrt(loams);
 }
 function jokeClick(number) {
-    jokes = Math.trunc((jokes + number)*10)/10;
-    document.getElementById('jokeAmount').innerHTML = jokes;
+    jokes = jokes + number;
+    document.getElementById('jokeAmount').innerHTML = convrt(jokes);
 }
 
 function save(){
@@ -98,7 +113,7 @@ function load(){
     }
     if (typeof savegame.autoSaRTeam !== "undefined") {autoSaRTeam = savegame.autoSaRTeam;
         if(autoSaRTeam) {
-            document.getElementById('autoHeliStatus').innerHTML = 'Enabled';
+            document.getElementById('autoSaRTeamStatus').innerHTML = 'Enabled';
         }
     }
     if (typeof savegame.autoSaRTeam !== "undefined") {autoSaRTeamUnlocked = savegame.autoSaRTeamUnlocked;
@@ -355,6 +370,7 @@ function resetLoam() {
         heliWorth = 0.5
         teams=0;
         teamWorth = 1;
+        tuesdayWorth = 1;
         liams=0;
         document.getElementById('teamAmount').innerHTML = teams;
         document.getElementById('liamAmount').innerHTML = liams;
@@ -438,16 +454,16 @@ function buyChoir(){
 
 window.setInterval(function(){
         if((getLoamEquation())>=0) {
-            document.getElementById('loamPotention').innerHTML = Math.round(getLoamEquation()*10)/10;
+            document.getElementById('loamPotention').innerHTML = convrt(getLoamEquation());
         } else {
             document.getElementById('loamPotention').innerHTML = 0;
         }
         if((getLarryEquation())>=0) {
-            document.getElementById('larryPotention').innerHTML = Math.round(getLarryEquation()*10)/10;
+            document.getElementById('larryPotention').innerHTML = convrt(getLarryEquation());
         } else {
             document.getElementById('larryPotention').innerHTML = 0;
         }
-        document.getElementById('loamAmount').innerHTML = Math.round(loams*10)/10;
+        document.getElementById('loamAmount').innerHTML = convrt(loams);
         if (loamUnlocked == true) {
             document.getElementById('loam1').style.opacity = 1;
             document.getElementById('loam2').style.opacity = 1;
@@ -473,10 +489,10 @@ window.setInterval(function(){
         if (autoHeli) {
             buyHeli();
         }
-        document.getElementById('liamAmount').innerHTML = Math.round(liams*10)/10;
-        document.getElementById('loamAmount').innerHTML = Math.round(loams*10)/10;
-        document.getElementById('larryAmount').innerHTML = Math.round(larrys*10)/10;
-        document.getElementById('jokeAmount').innerHTML = Math.round(jokes*10)/10;
+        document.getElementById('liamAmount').innerHTML = convrt(liams);
+        document.getElementById('loamAmount').innerHTML = convrt(loams);
+        document.getElementById('larryAmount').innerHTML = convrt(larrys);
+        document.getElementById('jokeAmount').innerHTML = convrt(jokes);
 }, 10);
 
 window.setInterval(function(){

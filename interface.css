@@ -115,3 +115,14 @@ button1:active {
 .larryUnButton:hover {
   cursor:pointer;
 }
+
+.welcome {
+	text-align: center;
+}
+.findLiam {
+  display: block;
+  margin: auto;
+}
+#Upgrades {
+  margin-top: 10px;
+}
