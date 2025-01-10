@@ -29,18 +29,21 @@ function getJokeEquation() {
     return (Math.pow((larrys/10),jokeEquation));
 }
 
-function convrt(number) {
+function convrt(numbe) {
+    var number = numbe
     postfixes = ['', 'k', 'M', 'B', 'T', "Qd", "Qt", "Sx", "Sp", "Oc", "No", "Dc", "UDc", "DDc"]
     count = 0
     while (number >= 10) {
         number /= 10
         count++
     }
+    //console.log(count)
     if(count>=postfixes.length) {
         return Math.trunc(number*100)/100 + "e" + count;
     }
     else {
-        return Math.trunc(number*100)/100 + postfixes[count/3];
+        //console.log(numbe/(Math.pow(10,(count-(count%3)))))
+        return Math.trunc((numbe/Math.pow(10,(count-(count%3))))*100)/100 + postfixes[(count-(count%3))/3];
     }
 } 
 
