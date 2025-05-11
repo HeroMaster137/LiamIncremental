@@ -2,27 +2,72 @@
 <html>
 <head> <link rel="stylesheet" type="text/css" href="interface.css" />
     <meta charset="UTF-8" />
-    <title>Cuteness Tester</title>
-    <link rel="icon" type="image/x-icon" href="heart.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Liam Incremental</title>
+    <link rel="icon" type="image/x-icon" href="/LoamsHell.png">
 </head>
-<body>
-    <div class="title">Cuteness Tester</div>
-    <div class="subTitle">More lines will be added in the future, I just wanted to get this out quickly</div>
-    <div class="content">
-        <input class="cute" type="text" id="usernameInput" placeholder="Username On Any Platform">
-        <button class="cute" onclick="runCutenessTest()">Run Cuteness Test</button>
+<body onload="load()">
+    <div class="rightColumn border-right">
 
-        <div id="loading-wrapper">
-            <div id="spinner"></div>
-            <div id="computeText">temp</div>
-            <div id="loading-container">
-                <div id="loading-bar"></div>
+
+        <div class="tab">
+            <button class="tablinks" onclick="openTab(event, 'Upgrades')">Upgrades</button>
+            <button class="tablinks" onclick="openTab(event, 'Unlocks')">Unlocks</button>
+            <button class="tablinks" onclick="openTab(event, 'Settings')">Settings</button>
+          </div>
+         
+          <!-- Tab content -->
+          <div id="Upgrades" class="tabcontent">
+            <h1 class="welcome">Welcome to Liam Incremental!</h1>
+            <button onClick="liamClick(1)" class="findLiam">Find A Liam</button>
+            <h2>Search and Rescue Upgrades<br/></h2>
+            <button onClick="buySearchAndRescue()">Buy A Search And Rescue Team(+<span id="teamAdd">1</span> Liam/s)<br/>Cost: <span id="teamCost">10</span> Liams<br/>Teams: <span id="teamAmount">0</span></button>
+            <button onClick="buyHeli()">Buy A Helicopter(+<span id="heliAdd">0.5</span> to SaR Team Base)<br/>Cost: <span id="heliCost">100</span> Liams<br/>Helis: <span id="heliAmount">0</span></button>
+            <br/><button onClick="resetLiam()">Reach 1,000 Liams to reset Liams and SaR Upgrades to gain <b><span id="loamPotention">0</span></b> Loams</button>
+            <div id="loam1" style="opacity: 0;">
+                <h2>Loam Upgrades<br></h2>
+                <br><button onClick="buyGame()" class="loamButton" disabled>Buy A Game(Adds 0.1 to Helis)<br/>Cost: <span id="gameCost">5</span> Loams<br/>Games: <span id="gameAmount">0</span></button>
+                <button onClick="buyTuesday()" class="loamButton" disabled>Buy A Tuesday(1.7x SaR Team Upgrade for each Tuesday)<br/>Cost: <span id="tuesdayCost">15</span> Loams<br/>Tuesdays: <span id="tuesdayAmount">0</span></button>
+                <button onClick="buyReeks()" class="loamButton" disabled>Buy A Reeks(Minus Liam upgrades scaling exponent by 0.03 per level)<br/>Cost: <span id="reeksCost">100</span> Loams<br/>Reeks: <span id="reeksAmount">0</span>/10</button>
+                <br/><button onClick="resetLoam()">Reach 100,000 Liams to reset Loams, Loam Upgrades, Liams, and SaR Upgrades to gain <b><span id="larryPotention">0</span></b> Larrys</button>
+            </div>
+            <div id="larry1" style="opacity: 0;">
+                <br><h2>Larry Upgrades</h2>
+                <button onClick="buyChoir()" class="larryButton" disabled>Buy A Choir(Gain 4% of Loams you would get from resetting per second)<br/>Cost: <span id="choirCost">15</span> Larrys<br/>Choirs: <span id="choirAmount">0</span>/25</button>
+            </div>
+            <div id="joke1" style="opacity: 0;">
+                <br><h2>Joke Upgrades</h2>
             </div>
         </div>
+         
+          <div id="Unlocks" class="tabcontent">
+            <div id="loam2" style="opacity: 0;">
+                <h2>Loam Unlocks<br/></h2>
+                <button onClick="buyMonday()" class="loamButton" disabled>Buy Day After Monday Unlock(Start with 1 SaR Team after Loam reset)<br/>Cost: <span id="mondayUnlockCost">50 Loams</span><br/></button>
+                <button onClick="buyBetterLoam()" class="loamButton" disabled>Buy Loam Unleashed Unlock(Increases amount of loam gained)<br/>Cost: <span id="loamUnlockCost">100 Loams</span><br/></button>
+                <button onClick="buyAutoSaRTeam()" class="loamButton" disabled>Buy SaR Team Manager(Autobuys SaR Teams)<br/>Cost: <span id="autoSaRTeamUnlockCost">250 Loams</span><br/>Status(click to switch status): <span id="autoSaRTeamStatus">Disabled</span></button>
+                <button onClick="buyAutoHeli()" class="loamButton" disabled>Buy Heli Manager(Autobuys Helis)<br/>Cost: <span id="autoHeliUnlockCost">250 Loams</span><br/>Status(click to switch status): <span id="autoHeliStatus">Disabled</span></button>
+            </div>
+            <div id="larry2" style="opacity: 0;">
+                <br><h2>Larry Unlocks<br/></h2>
+                <button onClick="buyYikes()" class="larryButton" disabled>Buy Yikes(Don't lose SaR Upgrades on Loam Reset)<br/>Cost: <span id="yikesUnlockCost">5 Larrys</span></button>
+                <button onClick="buyJokes()" class="larryButton" disabled>Buy Jokes(Gain jokes per second based of a reduced rate of amount of Larrys)<br/>Cost: <span id="jokeUnlockCost">20 Larrys</span></button>
+                <button onClick="buyJorts()" class="larryButton" disabled>Buy Jorts(Liam and Loam upgrades don't subtract money)<br/>Cost: <span id="jortsUnlockCost">100 Larrys</span></button>
+            </div>
+            <div id="joke2" style="opacity: 0;">
+                <br><h2>Joke Unlocks<br/></h2>
+            </div>
+          </div>
+         
+          <div id="Settings" class="tabcontent">
+            <button1 onClick="deleteSave()">DELETE SAVE</button1>
+            <h1>I'm warning you, this WILL delete your save! Only click if you really want to get rid of your progress(not like there is much progress you could get rid of, this game is pretty empty right now)</h1>
+          </div>
     </div>
-    <div class="corner-buttons">
-        <a href="https://github.com/HeroMaster137" target="_blank"><button><i class="fa-brands fa-github"></i></button></a>
+    <div>
+        <h1 style="text-align: center;"><span id="liamAmount">0</span></h1><h2 style="text-align: center;">Liams</h2>
+        <br/><h1 id = "loam3" style="text-align: center;"><span id="loamAmount">0</span></h1><h2 id = "loam4" style="text-align: center;"> Loams</h2>
+        <br/><h1 id = "larry3" style="text-align: center;"><span id="larryAmount">0</span></h1><h2 id = "larry4" style="text-align: center;"> Larrys</h2>
+        <br/><h1 style="text-align: center;"><span id="jokeAmount">0</span></h1><h2 style="text-align: center;"> Jokes</h2>
     </div>
 </body> <script type="text/javascript" src="main.js"></script>
 </html>
